@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <audio id="aud" src="http://localhost:5173/wedding_music.mp3" loop></audio>
+  <div id="log">Ready</div>
+  <script>
+    const a = document.getElementById("aud");
+    a.muted = true;
+    a.play().then(() => {
+      console.log("Playing muted");
+      setTimeout(() => {
+        try {
+          a.muted = false;
+          console.log("Unmuted! Paused: " + a.paused);
+        } catch(e) {
+          console.log("Unmute error: " + e.message);
+        }
+      }, 1000);
+    }).catch(err => {
+      console.log("Play err: " + err.message);
+    });
+  </script>
+</body>
+</html>

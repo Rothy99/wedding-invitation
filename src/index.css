@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+    text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: #FAF5EB;
+    color: #382B22;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+
+  /* Prevent automatic iOS zoom on mobile form focus (iPhone zoom bug fix) */
+  @media screen and (max-width: 640px) {
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="number"],
+    textarea,
+    select {
+      font-size: 16px !important;
+    }
+  }
+
+  /* Silky smooth text rendering during kinetic scroll */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Mobile GPU acceleration & kinetic smoothness helpers */
+.gpu-accelerated {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.momentum-scroll {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Authentic Khmer Silk Brocade Pattern (ក្រណាត់សូត្រហូលក្បាច់ផ្កាច័ន្ទ) */
+.bg-khmer-silk-pattern {
+  background-color: #FAF5EB;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.045' fill-rule='evenodd'%3E%3Cpath d='M40 10 C36 22 28 28 16 32 C28 36 36 42 40 54 C44 42 52 36 64 32 C52 28 44 22 40 10 Z' /%3E%3Ccircle cx='40' cy='32' r='4' /%3E%3Ccircle cx='0' cy='0' r='2' /%3E%3Ccircle cx='80' cy='0' r='2' /%3E%3Ccircle cx='0' cy='80' r='2' /%3E%3Ccircle cx='80' cy='80' r='2' /%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Custom Gold & Metallic Gradients */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #ECC868 0%, #D4AF37 40%, #AA8022 70%, #F5DE96 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gold-bright {
+  background: linear-gradient(135deg, #FFF0B8 0%, #F2CE64 50%, #B8891A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #D4AF37 0%, #F5DE96 50%, #B88B22 100%);
+}
+
+.bg-gold-subtle {
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.12) 0%, rgba(212, 175, 55, 0.04) 100%);
+}
+
+.bg-burgundy-gradient {
+  background: linear-gradient(145deg, #7A1429 0%, #520B1A 50%, #35050F 100%);
+}
+
+.border-gold-glow {
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+.shadow-royal {
+  box-shadow: 0 12px 35px -8px rgba(74, 7, 19, 0.25), 0 4px 12px rgba(212, 175, 55, 0.15);
+}
+
+.shadow-gold-inner {
+  box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.25);
+}
+
+/* Khmer traditional motif frame helper */
+.khmer-corner-tl {
+  top: 6px;
+  left: 6px;
+}
+.khmer-corner-tr {
+  top: 6px;
+  right: 6px;
+  transform: scaleX(-1);
+}
+.khmer-corner-bl {
+  bottom: 6px;
+  left: 6px;
+  transform: scaleY(-1);
+}
+.khmer-corner-br {
+  bottom: 6px;
+  right: 6px;
+  transform: scale(-1, -1);
+}
+
+@media (min-width: 640px) {
+  .khmer-corner-tl {
+    top: 8px;
+    left: 8px;
+  }
+  .khmer-corner-tr {
+    top: 8px;
+    right: 8px;
+  }
+  .khmer-corner-bl {
+    bottom: 8px;
+    left: 8px;
+  }
+  .khmer-corner-br {
+    bottom: 8px;
+    right: 8px;
+  }
+}
+
+/* Wax seal 3D effect */
+.wax-seal {
+  background: radial-gradient(circle at 35% 35%, #D4AF37 0%, #A97C19 65%, #6B4E0C 100%);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.4), inset 0 -3px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF6EE;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 9999px;
+}
+
+/* Glassmorphism Luxury Styles */
+.glass-luxury-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(20, 15, 18, 0.22) 50%, rgba(10, 8, 10, 0.38) 100%);
+  backdrop-filter: blur(3px) saturate(125%);
+  -webkit-backdrop-filter: blur(3px) saturate(125%);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 
+    0 16px 40px 0 rgba(0, 0, 0, 0.40),
+    inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.glass-luxury-pill {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(15, 10, 12, 0.28) 100%);
+  backdrop-filter: blur(3px) saturate(125%);
+  -webkit-backdrop-filter: blur(3px) saturate(125%);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.30), inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
+}
+
