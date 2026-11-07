@@ -82,7 +82,7 @@ export const HeaderBlessing: React.FC<HeaderBlessingProps> = ({ isRevealed = tru
 
       {/* Formal Respectful Guest Address Card (Royal Wedding Card Parchment) */}
       <div 
-        className={`relative rounded-3xl bg-gradient-to-b from-[#FFFDF9] via-[#FAF6ED] to-[#F5EEDC] p-4 sm:p-8 border-2 border-gold-400/70 shadow-[0_15px_40px_-10px_rgba(74,7,19,0.22),0_4px_20px_rgba(212,175,55,0.25)] overflow-hidden transition-all duration-800 delay-350 ease-out ${
+        className={`relative rounded-3xl bg-gradient-to-b from-[#FFFDF9]/92 via-[#FAF6ED]/88 to-[#F5EEDC]/90 backdrop-blur-md p-4 sm:p-8 border-2 border-gold-400/70 shadow-[0_15px_40px_-10px_rgba(74,7,19,0.22),0_4px_20px_rgba(212,175,55,0.25)] overflow-hidden transition-all duration-800 delay-350 ease-out ${
           isRevealed ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-[0.98]'
         }`}
       >

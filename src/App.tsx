@@ -87,12 +87,12 @@ export const App: React.FC = () => {
           className="w-full h-full object-cover object-[center_top]"
           loading="eager"
         />
-        {/* Soft Royal Silk Ambient Overlay for perfect legibility without live blur GPU overhead */}
-        <div className="absolute inset-0 bg-[#FAF5EB]/88" />
+        {/* Soft Royal Silk Ambient Overlay for perfect legibility and visible Angkor aesthetic */}
+        <div className="absolute inset-0 bg-[#FAF5EB]/72 backdrop-blur-[1px]" />
         {/* Authentic Khmer Silk Brocade Texture */}
-        <div className="absolute inset-0 bg-khmer-silk-pattern opacity-25" />
+        <div className="absolute inset-0 bg-khmer-silk-pattern opacity-30" />
         {/* Subtle Vignette for Regal Depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF5EB]/40 via-transparent to-[#FAF5EB]/75" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF5EB]/35 via-transparent to-[#FAF5EB]/65" />
       </div>
 
       {/* Falling Lotus Petals & Gold Sparkles */}

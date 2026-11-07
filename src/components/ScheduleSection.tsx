@@ -37,9 +37,9 @@ export const ScheduleSection: React.FC = () => {
 
   return (
     <section className="relative my-6 sm:my-8 w-full max-w-3xl mx-auto">
-      <div className="relative rounded-3xl bg-white/98 border border-gold-400/50 p-4 sm:p-10 shadow-royal overflow-hidden">
+      <div className="relative rounded-3xl bg-white/88 backdrop-blur-md border border-gold-400/60 p-4 sm:p-10 shadow-royal overflow-hidden">
         {/* Authentic Khmer Silk Brocade & Watermark Background */}
-        <KhmerCardBackground patternOpacity={0.16} watermarkOpacity={0.08} watermarkSize="w-72 sm:w-96 h-72 sm:h-96" />
+        <KhmerCardBackground patternOpacity={0.18} watermarkOpacity={0.10} watermarkSize="w-72 sm:w-96 h-72 sm:h-96" />
         
         {/* Corner Motifs */}
         <KhmerCorner className="absolute khmer-corner-tl text-gold-500 opacity-70" size={36} />
@@ -59,14 +59,14 @@ export const ScheduleSection: React.FC = () => {
           <KhmerDivider className="my-4" />
         </div>
 
-        {/* Tab Switcher: Morning vs Evening (Mobile Responsive Stack) */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 mb-8 relative z-10 w-full max-w-lg mx-auto">
+        {/* Tab Switcher: Morning vs Evening (Luxury Royal Pill Dock matching screenshot) */}
+        <div className="p-1 sm:p-1.5 rounded-full bg-stone-900/10 backdrop-blur-md border border-gold-400/40 shadow-inner flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 mb-8 relative z-10 w-full max-w-lg mx-auto">
           <button
             onClick={() => setActiveTab('morning')}
             className={`w-full sm:w-auto flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-full font-kantumruy text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
               activeTab === 'morning'
-                ? 'bg-burgundy-900 text-gold-200 shadow-md border border-gold-400'
-                : 'bg-gold-50 text-stone-600 hover:bg-gold-100/70 border border-gold-200'
+                ? 'bg-gradient-to-r from-burgundy-950 via-burgundy-900 to-burgundy-950 text-gold-200 shadow-[0_4px_14px_rgba(92,18,33,0.45),inset_0_1px_1px_rgba(255,255,255,0.25)] border border-gold-400/80'
+                : 'bg-white/85 text-stone-700 hover:bg-white hover:text-burgundy-900 border border-stone-200/80 hover:border-gold-300/80 shadow-sm'
             }`}
           >
             <Sun className={`w-4 h-4 ${activeTab === 'morning' ? 'text-gold-400' : 'text-amber-500'}`} />
@@ -77,8 +77,8 @@ export const ScheduleSection: React.FC = () => {
             onClick={() => setActiveTab('evening')}
             className={`w-full sm:w-auto flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-full font-kantumruy text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
               activeTab === 'evening'
-                ? 'bg-burgundy-900 text-gold-200 shadow-md border border-gold-400'
-                : 'bg-gold-50 text-stone-600 hover:bg-gold-100/70 border border-gold-200'
+                ? 'bg-gradient-to-r from-burgundy-950 via-burgundy-900 to-burgundy-950 text-gold-200 shadow-[0_4px_14px_rgba(92,18,33,0.45),inset_0_1px_1px_rgba(255,255,255,0.25)] border border-gold-400/80'
+                : 'bg-white/85 text-stone-700 hover:bg-white hover:text-burgundy-900 border border-stone-200/80 hover:border-gold-300/80 shadow-sm'
             }`}
           >
             <Moon className={`w-4 h-4 ${activeTab === 'evening' ? 'text-gold-400' : 'text-indigo-500'}`} />
