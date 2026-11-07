@@ -23,26 +23,53 @@ export const App: React.FC = () => {
   const [isCycleSparkleActive, setIsCycleSparkleActive] = useState(false);
   const [shouldAutoPlayMusic, setShouldAutoPlayMusic] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isOpeningDone, setIsOpeningDone] = useState(false);
 
+  // Throttled high-efficiency scroll listener: only triggers setState on actual threshold crossings
   useEffect(() => {
+    let prev = false;
+    let ticking = false;
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 450);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const shouldShow = window.scrollY > 450;
+          if (shouldShow !== prev) {
+            prev = shouldShow;
+            setShowScrollTop(shouldShow);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Free GPU memory after the 3.4s cinematic unveiling completes
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+    if (isEnvelopeOpen) {
+      timer = setTimeout(() => {
+        setIsOpeningDone(true);
+      }, 3600);
+    } else {
+      setIsOpeningDone(false);
+    }
+    return () => clearTimeout(timer);
+  }, [isEnvelopeOpen]);
 
   const handleOpenEnvelope = () => {
     setIsEnvelopeOpen(true);
     setIsCycleSparkleActive(true);
     setShouldAutoPlayMusic(true);
     weddingAudio.play();
-    // Instant anchor to top to prevent scroll jitter during unveiling
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   const handleReopenEnvelope = () => {
     setIsEnvelopeOpen(false);
+    setIsOpeningDone(false);
     setIsCycleSparkleActive(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -50,18 +77,22 @@ export const App: React.FC = () => {
   return (
     <div className="min-h-screen text-stone-800 font-kantumruy relative selection:bg-gold-500 selection:text-burgundy-950 overflow-x-hidden">
       {/* Cinematic Full-Page Angkor Pre-Wedding Background for Home Screen */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden select-none">
+      <div 
+        className="fixed inset-0 z-0 pointer-events-none overflow-hidden select-none"
+        style={{ contain: 'strict' }}
+      >
         <img
           src="/couple_angkor.jpg"
           alt="Angkor Wat Pre-Wedding Background"
-          className="w-full h-full object-cover object-[center_top] transform-gpu"
+          className="w-full h-full object-cover object-[center_top]"
+          loading="eager"
         />
-        {/* Soft Royal Silk Frosted Ambient Overlay for perfect legibility */}
-        <div className="absolute inset-0 bg-[#FAF5EB]/75 backdrop-blur-[2px]" />
+        {/* Soft Royal Silk Ambient Overlay for perfect legibility without live blur GPU overhead */}
+        <div className="absolute inset-0 bg-[#FAF5EB]/88" />
         {/* Authentic Khmer Silk Brocade Texture */}
-        <div className="absolute inset-0 bg-khmer-silk-pattern opacity-35 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-khmer-silk-pattern opacity-25" />
         {/* Subtle Vignette for Regal Depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF5EB]/30 via-transparent to-[#FAF5EB]/65" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF5EB]/40 via-transparent to-[#FAF5EB]/75" />
       </div>
 
       {/* Falling Lotus Petals & Gold Sparkles */}
@@ -91,17 +122,19 @@ export const App: React.FC = () => {
         <ChevronUp className="w-5 h-5 text-burgundy-900" />
       </button>
 
-      {/* Main Wedding Invitation Ceremony View - Synchronized 3.4s Cinematic Slow-Motion Entrance */}
+      {/* Main Wedding Invitation Ceremony View - Cinematic Entrance with GPU Release */}
       <main 
-        className={`relative z-10 max-w-3xl mx-auto min-h-screen pb-12 px-3 sm:px-5 transition-all duration-[3400ms] ${
+        className={`relative z-10 max-w-3xl mx-auto min-h-screen pb-12 px-3 sm:px-5 ${
+          !isOpeningDone ? 'transition-all duration-[3400ms]' : ''
+        } ${
           isEnvelopeOpen 
             ? 'opacity-100 scale-100 translate-y-0 blur-0 pointer-events-auto' 
             : 'opacity-0 scale-[0.93] translate-y-8 blur-[4px] pointer-events-none'
         }`}
-        style={{
+        style={!isOpeningDone ? {
           transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.35, 1)',
           willChange: 'transform, opacity, filter',
-        }}
+        } : undefined}
       >
         {/* Top Auspicious Header & Formal Blessing with Staggered Entrance */}
         <HeaderBlessing isRevealed={isEnvelopeOpen} />

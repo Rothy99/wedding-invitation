@@ -21,7 +21,7 @@ export const FooterBlessing: React.FC<FooterBlessingProps> = ({ onReopenEnvelope
 
       {/* Background ambient lighting */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[550px] h-[320px] bg-gold-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[550px] h-[320px] bg-[radial-gradient(ellipse_at_bottom,rgba(212,175,55,0.15)_0%,transparent_70%)]" />
       </div>
 
       <div className="relative z-10 max-w-2xl mx-auto px-4">

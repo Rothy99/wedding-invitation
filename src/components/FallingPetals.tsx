@@ -60,62 +60,74 @@ export const FallingPetals: React.FC = () => {
       });
     }
 
+    let isScrolling = false;
+    let scrollTimeout: ReturnType<typeof setTimeout>;
+    const handleScroll = () => {
+      isScrolling = true;
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+      }, 90);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     const render = () => {
-      ctx.clearRect(0, 0, width, height);
+      // During active kinetic touch scroll, skip heavy canvas clear/draw to preserve 120fps/60fps frame rate
+      if (!isScrolling) {
+        ctx.clearRect(0, 0, width, height);
 
-      particles.forEach((p) => {
-        p.wobble += p.wobbleSpeed;
-        p.y += p.speedY;
-        p.x += Math.sin(p.wobble) * 0.9 + p.speedX;
-        p.rotation += p.rotationSpeed;
+        particles.forEach((p) => {
+          p.wobble += p.wobbleSpeed;
+          p.y += p.speedY;
+          p.x += Math.sin(p.wobble) * 0.9 + p.speedX;
+          p.rotation += p.rotationSpeed;
 
-        if (p.y > height + 25) {
-          p.y = -25;
-          p.x = Math.random() * width;
-        }
+          if (p.y > height + 25) {
+            p.y = -25;
+            p.x = Math.random() * width;
+          }
 
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate((p.rotation * Math.PI) / 180);
-        ctx.globalAlpha = p.opacity;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.globalAlpha = p.opacity;
 
-        if (p.type === 'romduol_petal') {
-          // Khmer Romduol Golden Petal
-          ctx.beginPath();
-          ctx.moveTo(0, -p.size);
-          ctx.bezierCurveTo(p.size * 0.9, -p.size * 0.5, p.size * 0.8, p.size * 0.8, 0, p.size * 1.2);
-          ctx.bezierCurveTo(-p.size * 0.8, p.size * 0.8, -p.size * 0.9, -p.size * 0.5, 0, -p.size);
-          ctx.fillStyle = 'rgba(238, 204, 118, 0.55)';
-          ctx.fill();
-          ctx.strokeStyle = 'rgba(184, 139, 34, 0.4)';
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
-        } else if (p.type === 'jasmine') {
-          // Soft Jasmine Petal (ផ្កាម្លិះ)
-          ctx.beginPath();
-          ctx.moveTo(0, -p.size * 0.8);
-          ctx.bezierCurveTo(p.size * 0.7, -p.size * 0.2, p.size * 0.5, p.size * 0.6, 0, p.size);
-          ctx.bezierCurveTo(-p.size * 0.5, p.size * 0.6, -p.size * 0.7, -p.size * 0.2, 0, -p.size * 0.8);
-          ctx.fillStyle = 'rgba(255, 252, 240, 0.7)';
-          ctx.fill();
-        } else {
-          // Twinkling Golden Stardust Sparkle (High Performance, No CPU shadowBlur)
-          const twinkle = Math.abs(Math.sin(p.wobble * 2));
-          const r = (p.size * 0.4) * (0.6 + 0.4 * twinkle);
-          // Soft outer halo
-          ctx.beginPath();
-          ctx.arc(0, 0, r * 2.2, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(212, 175, 55, 0.22)';
-          ctx.fill();
-          // Bright center stardust
-          ctx.beginPath();
-          ctx.arc(0, 0, r, 0, Math.PI * 2);
-          ctx.fillStyle = '#FFF1B0';
-          ctx.fill();
-        }
+          if (p.type === 'romduol_petal') {
+            // Khmer Romduol Golden Petal
+            ctx.beginPath();
+            ctx.moveTo(0, -p.size);
+            ctx.bezierCurveTo(p.size * 0.9, -p.size * 0.5, p.size * 0.8, p.size * 0.8, 0, p.size * 1.2);
+            ctx.bezierCurveTo(-p.size * 0.8, p.size * 0.8, -p.size * 0.9, -p.size * 0.5, 0, -p.size);
+            ctx.fillStyle = 'rgba(238, 204, 118, 0.55)';
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(184, 139, 34, 0.4)';
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          } else if (p.type === 'jasmine') {
+            // Soft Jasmine Petal (ផ្កាម្លិះ)
+            ctx.beginPath();
+            ctx.moveTo(0, -p.size * 0.8);
+            ctx.bezierCurveTo(p.size * 0.7, -p.size * 0.2, p.size * 0.5, p.size * 0.6, 0, p.size);
+            ctx.bezierCurveTo(-p.size * 0.5, p.size * 0.6, -p.size * 0.7, -p.size * 0.2, 0, -p.size * 0.8);
+            ctx.fillStyle = 'rgba(255, 252, 240, 0.7)';
+            ctx.fill();
+          } else {
+            // Twinkling Golden Stardust Sparkle
+            const twinkle = Math.abs(Math.sin(p.wobble * 2));
+            const r = (p.size * 0.4) * (0.6 + 0.4 * twinkle);
+            ctx.beginPath();
+            ctx.arc(0, 0, r * 2.2, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(212, 175, 55, 0.22)';
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(0, 0, r, 0, Math.PI * 2);
+            ctx.fillStyle = '#FFF1B0';
+            ctx.fill();
+          }
 
-        ctx.restore();
-      });
+          ctx.restore();
+        });
+      }
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -134,7 +146,9 @@ export const FallingPetals: React.FC = () => {
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('visibilitychange', handleVisibility);
+      clearTimeout(scrollTimeout);
       cancelAnimationFrame(animationFrameId);
     };
   }, [isEnabled]);
@@ -145,7 +159,7 @@ export const FallingPetals: React.FC = () => {
         <canvas
           ref={canvasRef}
           className="fixed inset-0 pointer-events-none z-30"
-          style={{ willChange: 'transform', transform: 'translate3d(0,0,0)' }}
+          style={{ contain: 'strict', willChange: 'transform' }}
           aria-hidden="true"
         />
       )}

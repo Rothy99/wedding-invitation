@@ -28,7 +28,7 @@ export const HeaderBlessing: React.FC<HeaderBlessingProps> = ({ isRevealed = tru
     <header className="relative pt-4 sm:pt-8 text-center w-full max-w-3xl mx-auto">
       {/* Radiant Angkor Sunrise Backdrop Flare */}
       <div 
-        className={`absolute top-0 left-1/2 -translate-x-1/2 w-80 h-44 bg-[radial-gradient(circle,rgba(212,175,55,0.25)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none transition-opacity duration-1000 ${
+        className={`absolute top-0 left-1/2 -translate-x-1/2 w-80 h-44 bg-[radial-gradient(circle,rgba(212,175,55,0.22)_0%,transparent_70%)] rounded-full pointer-events-none transition-opacity duration-1000 ${
           isRevealed ? 'opacity-100' : 'opacity-0'
         }`} 
       />
@@ -66,11 +66,11 @@ export const HeaderBlessing: React.FC<HeaderBlessingProps> = ({ isRevealed = tru
 
         {/* Auspicious Date & Venue Quick Badges */}
         <div className="flex flex-wrap items-center justify-center gap-2 mt-3.5 text-xs font-kantumruy">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 border border-gold-400/50 text-stone-800 shadow-sm backdrop-blur-sm">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 border border-gold-400/50 text-stone-800 shadow-sm">
             <Calendar className="w-3.5 h-3.5 text-burgundy-800" />
             <span className="font-medium">{event.solarDateKhmer}</span>
           </div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 border border-gold-400/50 text-stone-800 shadow-sm backdrop-blur-sm">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 border border-gold-400/50 text-stone-800 shadow-sm">
             <MapPin className="w-3.5 h-3.5 text-burgundy-800" />
             <span className="font-medium">{event.venueNameKhmer}</span>
           </div>

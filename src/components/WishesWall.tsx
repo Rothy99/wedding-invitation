@@ -113,7 +113,7 @@ export const WishesWall: React.FC = () => {
 
   return (
     <section className="relative my-6 sm:my-8 w-full max-w-3xl mx-auto">
-      <div className="relative rounded-3xl bg-white/95 backdrop-blur-sm border border-gold-400/50 p-4 sm:p-10 shadow-royal overflow-hidden">
+      <div className="relative rounded-3xl bg-white/98 border border-gold-400/50 p-4 sm:p-10 shadow-royal overflow-hidden">
         
         {/* Khmer Traditional Diamond Lattice & Watermark Background */}
         <KhmerCardBackground patternOpacity={0.16} watermarkOpacity={0.08} watermarkSize="w-72 sm:w-96 h-72 sm:h-96" />

@@ -58,7 +58,7 @@ export const GallerySection: React.FC = () => {
 
   return (
     <section className="relative my-6 sm:my-8 w-full max-w-3xl mx-auto">
-      <div className="relative rounded-3xl bg-white/95 backdrop-blur-sm border border-gold-400/50 p-4 sm:p-10 shadow-royal overflow-hidden">
+      <div className="relative rounded-3xl bg-white/98 border border-gold-400/50 p-4 sm:p-10 shadow-royal overflow-hidden">
         
         {/* Khmer Traditional Diamond Lattice & Watermark Background */}
         <KhmerCardBackground patternOpacity={0.16} watermarkOpacity={0.08} watermarkSize="w-72 sm:w-96 h-72 sm:h-96" />
@@ -135,7 +135,7 @@ export const GallerySection: React.FC = () => {
 
                 {/* Subtle Angkor Wat Badge on 1st Photo */}
                 {originalIndex === 0 && (
-                  <div className="absolute top-2.5 left-2.5 z-20 px-2 py-0.5 rounded-full bg-burgundy-950/85 border border-gold-400/60 text-gold-300 text-[10px] font-kantumruy backdrop-blur-sm flex items-center gap-1 shadow-md">
+                  <div className="absolute top-2.5 left-2.5 z-20 px-2 py-0.5 rounded-full bg-burgundy-950/95 border border-gold-400/60 text-gold-300 text-[10px] font-kantumruy flex items-center gap-1 shadow-md">
                     <Sparkles className="w-2.5 h-2.5 text-gold-400" />
                     <span>Angkor Wat</span>
                   </div>

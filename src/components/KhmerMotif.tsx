@@ -349,7 +349,7 @@ export const KhmerCardBackground: React.FC<{
         <img 
           src="/khmer_motif_45.png" 
           alt="" 
-          className="w-full h-full object-contain filter drop-shadow" 
+          className="w-full h-full object-contain" 
         />
       </div>
     </div>
