@@ -1,3 +1,35 @@
+/* ==========================================================================
+   Custom Khmer Typography: Kh Ang ToaThmor 3 (Regular) & Kh Ang Moul Seda (Bold)
+   ========================================================================== */
+@font-face {
+  font-family: 'Kh Ang ToaThmor 3';
+  src: local('Kh Ang ToaThmor 3'),
+       local('Kh-Ang-ToaThmor-3'),
+       local('KhAngToaThmor3'),
+       local('Kh Ang Toathmor 3'),
+       local('Kh Ang ToaThmor'),
+       url('/fonts/Kh-Ang-ToaThmor-3.ttf') format('truetype'),
+       url('/fonts/KhAngToaThmor3.ttf') format('truetype'),
+       url('/fonts/Kh_Ang_ToaThmor_3.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kh Ang Moul Seda';
+  src: local('Kh Ang Moul Seda'),
+       local('Kh-Ang-Moul-Seda'),
+       local('KhAngMoulSeda'),
+       local('Kh Ang Moul'),
+       url('/fonts/Kh-Ang-Moul-Seda.ttf') format('truetype'),
+       url('/fonts/KhAngMoulSeda.ttf') format('truetype'),
+       url('/fonts/Kh_Ang_Moul_Seda.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,6 +46,17 @@
     color: #382B22;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
+    font-family: 'Kh Ang ToaThmor 3', 'Kh Ang ToaThmor', 'Kdam Thmor Pro', 'Kantumruy Pro', sans-serif;
+  }
+
+  /* Regular Khmer Text: Kh Ang ToaThmor 3 */
+  p, span, li, button, input, textarea, select {
+    font-family: 'Kh Ang ToaThmor 3', 'Kh Ang ToaThmor', 'Kdam Thmor Pro', 'Kantumruy Pro', sans-serif;
+  }
+
+  /* Bold Khmer Text & Headings: Kh Ang Moul Seda */
+  h1, h2, h3, h4, h5, h6, .font-moul, .font-bold {
+    font-family: 'Kh Ang Moul Seda', 'Kh Ang Moul', 'Moul', 'Khmer OS Muol', cursive, serif;
   }
 
   /* Prevent automatic iOS zoom on mobile form focus (iPhone zoom bug fix) */

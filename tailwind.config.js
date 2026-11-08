@@ -42,8 +42,11 @@ export default {
         }
       },
       fontFamily: {
-        moul: ['Moul', 'serif'],
-        kantumruy: ['"Kantumruy Pro"', 'sans-serif'],
+        regular: ['"Kh Ang ToaThmor 3"', '"Kh Ang ToaThmor"', '"Kdam Thmor Pro"', '"Kantumruy Pro"', 'Battambang', 'sans-serif'],
+        bold: ['"Kh Ang Moul Seda"', '"Kh Ang Moul"', 'Moul', '"Khmer OS Muol"', 'cursive', 'serif'],
+        moul: ['"Kh Ang Moul Seda"', '"Kh Ang Moul"', 'Moul', '"Khmer OS Muol"', 'cursive', 'serif'],
+        toathmor: ['"Kh Ang ToaThmor 3"', '"Kh Ang ToaThmor"', '"Kdam Thmor Pro"', '"Kantumruy Pro"', 'sans-serif'],
+        kantumruy: ['"Kh Ang ToaThmor 3"', '"Kh Ang ToaThmor"', '"Kdam Thmor Pro"', '"Kantumruy Pro"', 'Battambang', 'sans-serif'],
         siemreap: ['Siemreap', 'sans-serif'],
         battambang: ['Battambang', 'sans-serif'],
       },
