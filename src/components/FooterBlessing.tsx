@@ -1,6 +1,7 @@
 import React from 'react';
 import { weddingData } from '../config/weddingConfig';
 import { KhmerDivider, KbachPhkaChan, KhmerCardBackground } from './KhmerMotif';
+import { RoyalMonogramSeal } from './RoyalMonogramSeal';
 import { Mail, ArrowUp, Heart } from 'lucide-react';
 
 interface FooterBlessingProps {
@@ -28,10 +29,7 @@ export const FooterBlessing: React.FC<FooterBlessingProps> = ({ onReopenEnvelope
         {/* Monogram Crest with Kbach Phka Chan */}
         <div className="flex flex-col items-center mb-4">
           <KbachPhkaChan size={40} className="mb-3" />
-          <div className="relative w-16 h-16 rounded-full bg-gradient-to-br from-[#8E1B32] via-[#5C1221] to-[#3D0914] border-2 border-gold-400 mx-auto flex items-center justify-center shadow-xl text-gold-300">
-            <span className="font-moul text-lg tracking-wider text-gold-200">ស • វ</span>
-            <div className="absolute inset-0 rounded-full border border-gold-400/30 animate-pulse pointer-events-none" />
-          </div>
+          <RoyalMonogramSeal size="lg" monogram="ស • វ" />
         </div>
 
         <h3 className="font-moul text-xl sm:text-2xl text-gold-bright mb-2">

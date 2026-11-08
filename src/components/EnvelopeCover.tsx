@@ -6,6 +6,7 @@ import { backgroundConfig } from '../config/backgroundConfig';
 import { firstScreenConfig, getFirstScreenMedia } from '../config/firstScreenConfig';
 import { weddingAudio } from '../utils/audioManager';
 import { KbachPhkaChan, KhmerCardBackground } from './KhmerMotif';
+import { RoyalMonogramSeal } from './RoyalMonogramSeal';
 
 interface EnvelopeCoverProps {
   onOpen: () => void;
@@ -303,13 +304,12 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, isOpen }) 
 
         {/* Central Royal Monogram Wax Seal Medal on Door Seam */}
         {firstScreenConfig.animation.showMonogramSeal && (
-          <div 
-            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none w-12 h-12 rounded-full bg-gradient-to-br from-[#8E1B32] via-[#5C1221] to-[#3D0914] text-gold-300 border-2 border-gold-400 shadow-[0_4px_20px_rgba(0,0,0,0.6),0_0_15px_rgba(212,175,55,0.6)] flex items-center justify-center transition-all duration-900 ${
-              isOpen ? 'scale-125 opacity-0' : 'scale-100 opacity-100'
-            }`}
-          >
-            <span className="font-moul text-xs text-gold-200 tracking-wider">{firstScreenConfig.branding.sealMonogram}</span>
-            <div className="absolute inset-0 rounded-full border border-gold-400/40 animate-pulse pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none">
+            <RoyalMonogramSeal
+              monogram={firstScreenConfig.branding.sealMonogram}
+              size="md"
+              isOpen={isOpen}
+            />
           </div>
         )}
 

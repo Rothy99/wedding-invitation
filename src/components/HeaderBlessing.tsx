@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { KhmerDivider, KhmerCorner, KbachPhkaChan, KhmerCardBackground } from './KhmerMotif';
+import { RoyalMonogramSeal } from './RoyalMonogramSeal';
 import { weddingData } from '../config/weddingConfig';
 import { UserCheck, ChevronDown, Calendar, MapPin } from 'lucide-react';
 
@@ -101,10 +102,7 @@ export const HeaderBlessing: React.FC<HeaderBlessingProps> = ({ isRevealed = tru
 
         {/* Royal Wax Seal Monogram Badge */}
         <div className="flex justify-center -mt-1 mb-3">
-          <div className="relative flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#8E1B32] via-[#5C1221] to-[#3D0914] text-gold-300 border-2 border-gold-400 shadow-md">
-            <span className="font-moul text-xs text-gold-200 tracking-wider">ស • វ</span>
-            <div className="absolute inset-0 rounded-full border border-gold-400/40 animate-pulse pointer-events-none" />
-          </div>
+          <RoyalMonogramSeal size="sm" monogram="ស • វ" />
         </div>
 
         {/* Card Content */}
