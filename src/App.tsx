@@ -15,6 +15,7 @@ import { FallingPetals } from './components/FallingPetals';
 import { KbachVineRibbon } from './components/KhmerMotif';
 import { ScrollReveal } from './components/ScrollReveal';
 import { CycleSparkleOverlay } from './components/CycleSparkleOverlay';
+import { HomeScreenBackground } from './components/HomeScreenBackground';
 import { weddingAudio } from './utils/audioManager';
 import { ChevronUp } from 'lucide-react';
 
@@ -76,24 +77,8 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen text-stone-800 font-kantumruy relative selection:bg-gold-500 selection:text-burgundy-950 overflow-x-hidden">
-      {/* Cinematic Full-Page Angkor Pre-Wedding Background for Home Screen */}
-      <div 
-        className="fixed inset-0 z-0 pointer-events-none overflow-hidden select-none"
-        style={{ contain: 'strict' }}
-      >
-        <img
-          src="/couple_angkor.jpg"
-          alt="Angkor Wat Pre-Wedding Background"
-          className="w-full h-full object-cover object-[center_top]"
-          loading="eager"
-        />
-        {/* Soft Royal Silk Ambient Overlay for perfect legibility and visible Angkor aesthetic */}
-        <div className="absolute inset-0 bg-[#FAF5EB]/72 backdrop-blur-[1px]" />
-        {/* Authentic Khmer Silk Brocade Texture */}
-        <div className="absolute inset-0 bg-khmer-silk-pattern opacity-30" />
-        {/* Subtle Vignette for Regal Depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF5EB]/35 via-transparent to-[#FAF5EB]/65" />
-      </div>
+      {/* Configurable Full-Page Background (Image or Video with smart audio) */}
+      <HomeScreenBackground isEnvelopeOpen={isEnvelopeOpen} />
 
       {/* Falling Lotus Petals & Gold Sparkles */}
       <FallingPetals />

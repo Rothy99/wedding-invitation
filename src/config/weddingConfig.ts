@@ -1,3 +1,7 @@
+import { backgroundConfig, type BackgroundConfig } from './backgroundConfig';
+export { backgroundConfig };
+export type { BackgroundConfig };
+
 export interface ScheduleItem {
   time: string;
   timeKhmer: string;
@@ -67,9 +71,11 @@ export interface WeddingConfig {
     artist: string;
     url: string;
   };
+  background: BackgroundConfig;
 }
 
 export const weddingData: WeddingConfig = {
+  background: backgroundConfig,
   couple: {
     groom: {
       nameKhmer: "សុទ្ធា",

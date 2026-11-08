@@ -1,8 +1,11 @@
-﻿// Global Wedding Audio Controller for Reliable Autoplay Across Mobile & Desktop
+// Global Wedding Audio Controller for Reliable Autoplay Across Mobile & Desktop
+import { backgroundConfig } from '../config/backgroundConfig';
+
 type AudioSubscriber = (playing: boolean, isBlocked: boolean) => void;
 
 class WeddingAudioManager {
   private audio: HTMLAudioElement | null = null;
+  private videoEl: HTMLVideoElement | null = null;
   private isPlaying: boolean = false;
   private isBlocked: boolean = false;
   private listeners: Set<AudioSubscriber> = new Set();
@@ -11,13 +14,41 @@ class WeddingAudioManager {
 
   constructor() {
     if (typeof window !== 'undefined') {
-      this.initAudio();
+      if (!this.isVideoAudioMode()) {
+        this.initAudio();
+      }
       this.setupGlobalInteractionListeners();
     }
   }
 
+  /** Check if background video is active and should provide audio instead of mp3 */
+  public isVideoAudioMode(): boolean {
+    return backgroundConfig.type === 'video' && backgroundConfig.video.hasAudio;
+  }
+
+  /** Attach the background video element to synchronize volume and playback states */
+  public attachVideo(video: HTMLVideoElement | null) {
+    this.videoEl = video;
+    if (this.isVideoAudioMode() && this.videoEl) {
+      this.videoEl.addEventListener('play', () => {
+        this.isPlaying = !this.videoEl?.muted && !this.videoEl?.paused;
+        this.notify();
+      });
+
+      this.videoEl.addEventListener('pause', () => {
+        this.isPlaying = false;
+        this.notify();
+      });
+
+      this.videoEl.addEventListener('volumechange', () => {
+        this.isPlaying = !this.videoEl?.muted && !this.videoEl?.paused;
+        this.notify();
+      });
+    }
+  }
+
   private initAudio() {
-    if (this.audio) return;
+    if (this.audio || this.isVideoAudioMode()) return;
     try {
       this.audio = new Audio('/wedding_music.mp3');
       this.audio.loop = true;
@@ -63,7 +94,6 @@ class WeddingAudioManager {
 
   private setupGlobalInteractionListeners() {
     const handleGesture = () => {
-      this.initAudio();
       this.initAudioContext();
 
       // Resume AudioContext if suspended
@@ -71,18 +101,36 @@ class WeddingAudioManager {
         this.audioCtx.resume().catch(() => {});
       }
 
-      // If playback was requested (e.g. by 5s automation or user open action)
-      if (this.shouldPlayOnUnlock && !this.isPlaying && this.audio) {
-        this.audio
+      // If in video audio mode and playback was requested
+      if (this.isVideoAudioMode() && this.shouldPlayOnUnlock && this.videoEl) {
+        this.videoEl.muted = false;
+        this.videoEl.volume = backgroundConfig.video.volume;
+        this.videoEl
           .play()
           .then(() => {
             this.isPlaying = true;
             this.isBlocked = false;
             this.notify();
           })
-          .catch((err) => {
-            console.warn('Playback gesture retry error:', err);
-          });
+          .catch(() => {});
+        return;
+      }
+
+      // Normal MP3 mode
+      if (!this.isVideoAudioMode()) {
+        this.initAudio();
+        if (this.shouldPlayOnUnlock && !this.isPlaying && this.audio) {
+          this.audio
+            .play()
+            .then(() => {
+              this.isPlaying = true;
+              this.isBlocked = false;
+              this.notify();
+            })
+            .catch((err) => {
+              console.warn('Playback gesture retry error:', err);
+            });
+        }
       }
     };
 
@@ -103,14 +151,37 @@ class WeddingAudioManager {
   }
 
   public play(): Promise<void> {
-    this.initAudio();
-    this.initAudioContext();
     this.shouldPlayOnUnlock = true;
+    this.initAudioContext();
 
     if (this.audioCtx && this.audioCtx.state === 'suspended') {
       this.audioCtx.resume().catch(() => {});
     }
 
+    // Video Mode: Unmute and play the video audio, skip MP3 completely!
+    if (this.isVideoAudioMode()) {
+      if (this.videoEl) {
+        this.videoEl.muted = false;
+        this.videoEl.volume = backgroundConfig.video.volume;
+        return this.videoEl
+          .play()
+          .then(() => {
+            this.isPlaying = true;
+            this.isBlocked = false;
+            this.notify();
+          })
+          .catch((err) => {
+            console.warn('Video audio autoplay waiting for user gesture:', err);
+            this.isPlaying = false;
+            this.isBlocked = true;
+            this.notify();
+          });
+      }
+      return Promise.resolve();
+    }
+
+    // Image Mode: Play normal wedding MP3 audio
+    this.initAudio();
     if (!this.audio) return Promise.resolve();
 
     return this.audio
@@ -121,7 +192,6 @@ class WeddingAudioManager {
         this.notify();
       })
       .catch((err) => {
-        // Browser Autoplay Policy blocked unmuted audio because user hasn't interacted with page yet
         console.warn('Autoplay blocked by browser policy, waiting for user touch:', err);
         this.isPlaying = false;
         this.isBlocked = true;
@@ -132,6 +202,18 @@ class WeddingAudioManager {
   public pause(): void {
     this.shouldPlayOnUnlock = false;
     this.isBlocked = false;
+
+    // Video Mode: Mute video audio
+    if (this.isVideoAudioMode()) {
+      if (this.videoEl) {
+        this.videoEl.muted = true;
+      }
+      this.isPlaying = false;
+      this.notify();
+      return;
+    }
+
+    // MP3 Mode: Pause audio
     if (this.audio) {
       this.audio.pause();
       this.isPlaying = false;
@@ -140,6 +222,19 @@ class WeddingAudioManager {
   }
 
   public toggle(): void {
+    // Video Mode: Toggle mute / unmute
+    if (this.isVideoAudioMode()) {
+      if (this.videoEl) {
+        if (this.videoEl.muted || this.videoEl.paused) {
+          this.play();
+        } else {
+          this.pause();
+        }
+      }
+      return;
+    }
+
+    // MP3 Mode: Toggle play / pause
     if (this.isPlaying) {
       this.pause();
     } else {

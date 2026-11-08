@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Volume2, VolumeX, Music } from 'lucide-react';
+import { Volume2, VolumeX, Music, Video } from 'lucide-react';
 import { weddingData } from '../config/weddingConfig';
+import { backgroundConfig } from '../config/backgroundConfig';
 import { weddingAudio } from '../utils/audioManager';
 
 interface MusicPlayerProps {
@@ -10,6 +11,8 @@ interface MusicPlayerProps {
 export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoPlayTrigger }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isBlocked, setIsBlocked] = useState(false);
+
+  const isVideoMode = backgroundConfig.type === 'video' && backgroundConfig.video.hasAudio;
 
   useEffect(() => {
     const unsubscribe = weddingAudio.subscribe((playing, blocked) => {
@@ -33,6 +36,8 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoPlayTrigger }) => 
     weddingAudio.toggle();
   };
 
+  const displayTitle = isVideoMode ? 'សំឡេងវីដេអូ (Video Sound)' : weddingData.music.title;
+
   return (
     <>
       {/* Floating Bottom Music Controller */}
@@ -40,9 +45,13 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoPlayTrigger }) => 
         {/* Music Pill & Sound Waves */}
         {isPlaying ? (
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-burgundy-950/85 backdrop-blur-xl border border-gold-400/60 border-t-white/30 text-gold-200 text-xs shadow-[0_8px_25px_rgba(0,0,0,0.45),inset_0_1px_1px_rgba(255,255,255,0.25)] animate-fadeIn max-w-[200px] sm:max-w-xs">
-            <Music className="w-3.5 h-3.5 text-gold-400 animate-bounce flex-shrink-0" />
+            {isVideoMode ? (
+              <Video className="w-3.5 h-3.5 text-gold-400 animate-pulse flex-shrink-0" />
+            ) : (
+              <Music className="w-3.5 h-3.5 text-gold-400 animate-bounce flex-shrink-0" />
+            )}
             <span className="font-kantumruy font-medium text-[10px] sm:text-[11px] truncate max-w-[85px] sm:max-w-[150px]">
-              {weddingData.music.title}
+              {displayTitle}
             </span>
             {/* Animated sound equalizer bars */}
             <div className="flex items-end gap-0.5 h-3.5 ml-1">
@@ -57,10 +66,16 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoPlayTrigger }) => 
             <button
               onClick={handlePlay}
               className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gold-500/90 hover:bg-gold-500 backdrop-blur-md text-burgundy-950 text-xs font-semibold shadow-lg border border-gold-300 animate-pulse transition-all cursor-pointer"
-              title="ចុចដើម្បីបើកភ្លេង"
+              title={isVideoMode ? 'ចុចដើម្បីបើកសំឡេងវីដេអូ' : 'ចុចដើម្បីបើកភ្លេង'}
             >
-              <Music className="w-3.5 h-3.5 text-burgundy-950" />
-              <span className="font-kantumruy text-[11px]">ចុចស្តាប់បទចម្រៀង</span>
+              {isVideoMode ? (
+                <Video className="w-3.5 h-3.5 text-burgundy-950" />
+              ) : (
+                <Music className="w-3.5 h-3.5 text-burgundy-950" />
+              )}
+              <span className="font-kantumruy text-[11px]">
+                {isVideoMode ? 'ចុចបើកសំឡេងវីដេអូ' : 'ចុចស្តាប់បទចម្រៀង'}
+              </span>
             </button>
           )
         )}
@@ -68,8 +83,8 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoPlayTrigger }) => 
         {/* Floating Action Button */}
         <button
           onClick={togglePlay}
-          aria-label={isPlaying ? 'បិទភ្លេង' : 'បើកភ្លេង'}
-          title={isPlaying ? 'បិទភ្លេង (Mute Music)' : 'បើកភ្លេង (Play Music)'}
+          aria-label={isPlaying ? 'បិទសំឡេង' : 'បើកសំឡេង'}
+          title={isPlaying ? 'បិទសំឡេង (Mute)' : 'បើកសំឡេង (Unmute)'}
           className={`relative p-3 rounded-full border shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center cursor-pointer ${
             isPlaying
               ? 'bg-burgundy-950/85 backdrop-blur-xl border-gold-400/80 border-t-white/40 text-gold-200 shadow-[0_8px_25px_rgba(0,0,0,0.45),inset_0_1px_1.5px_rgba(255,255,255,0.35)] shadow-gold-500/20'
