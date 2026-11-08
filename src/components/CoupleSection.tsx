@@ -13,9 +13,9 @@ export const CoupleSection: React.FC = () => {
       >
         {/* Background Image: Authentic Pre-Wedding Portrait at Angkor Wat */}
         <img
-          src="/couple_angkor.jpg"
+          src="/couple_angkor.jpg?v=2"
           alt={`${groom.nameKhmer} និង ${bride.nameKhmer}`}
-          className="absolute inset-0 w-full h-full object-cover object-[center_top] pointer-events-none"
+          className="absolute inset-0 w-full h-full object-cover object-[center_20%] pointer-events-none"
         />
 
         {/* Ambient Top Vignette for Title Legibility without darkening the temple */}

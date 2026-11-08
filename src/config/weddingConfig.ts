@@ -86,7 +86,7 @@ export const weddingData: WeddingConfig = {
       motherKhmer: "អ្នកម្តាយ ម៉ៅ ចិន្តា",
       phone: "012 888 999",
       telegram: "sutha_wedding",
-      avatar: "/couple_angkor.jpg",
+      avatar: "/couple_angkor.jpg?v=2",
     },
     bride: {
       nameKhmer: "សុខវត្ដី",
@@ -96,7 +96,7 @@ export const weddingData: WeddingConfig = {
       motherKhmer: "អ្នកម្តាយ អ៊ុក សុភាព",
       phone: "098 777 666",
       telegram: "sokhvathey_wedding",
-      avatar: "/couple_angkor.jpg",
+      avatar: "/couple_angkor.jpg?v=2",
     },
   },
   event: {
@@ -185,7 +185,7 @@ export const weddingData: WeddingConfig = {
   },
   gallery: [
     {
-      url: "/couple_angkor.jpg",
+      url: "/couple_angkor.jpg?v=2",
       captionKhmer: "ស្នេហានិរន្តរ៍ ចំណងនិស្ស័យ",
       captionEn: "Eternal Love & Destined Bond",
     },

@@ -85,7 +85,7 @@ export const backgroundConfig: BackgroundConfig = {
   // 2. IMAGE CONFIGURATION (បើជ្រើសរើស Image)
   // ===================================================================
   image: {
-    url: '/couple_angkor.jpg',
+    url: '/couple_angkor.jpg?v=2',
     alt: 'Angkor Wat Pre-Wedding Background',
   },
 
