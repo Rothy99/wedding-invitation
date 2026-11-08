@@ -89,7 +89,7 @@ export const RoyalMonogramSeal: React.FC<RoyalMonogramSealProps> = ({
         {/* Monogram Typography (Centered with breathing room to prevent edge clipping) */}
         <div className={`relative z-10 flex items-center justify-center ${sizeConfig.gap} px-2 leading-none`}>
           <span
-            className={`font-moul ${sizeConfig.fontSize} text-[#FFF6DF] font-bold tracking-tight inline-block text-center`}
+            className={`font-moul ${sizeConfig.fontSize} text-[#FFF6DF] font-bold tracking-normal inline-block text-center`}
             style={{
               textShadow: '0 1px 1px rgba(0,0,0,0.9), 0 2px 6px rgba(0,0,0,0.8), 0 0 10px rgba(212,175,55,0.4)',
               transform: 'translateY(1px)',
@@ -98,19 +98,19 @@ export const RoyalMonogramSeal: React.FC<RoyalMonogramSealProps> = ({
             {letter1}
           </span>
 
-          {/* Golden Center Diamond / Bullet */}
+          {/* Golden Center Circular Bullet */}
           <span
-            className={`${sizeConfig.dotSize} text-gold-300 flex-shrink-0 animate-pulse select-none`}
+            className={`${sizeConfig.dotSize} text-gold-300 flex-shrink-0 select-none text-center`}
             style={{
               textShadow: '0 0 6px rgba(212,175,55,0.9)',
               transform: 'translateY(-0.5px)',
             }}
           >
-            ✦
+            •
           </span>
 
           <span
-            className={`font-moul ${sizeConfig.fontSize} text-[#FFF6DF] font-bold tracking-tight inline-block text-center`}
+            className={`font-moul ${sizeConfig.fontSize} text-[#FFF6DF] font-bold tracking-normal inline-block text-center`}
             style={{
               textShadow: '0 1px 1px rgba(0,0,0,0.9), 0 2px 6px rgba(0,0,0,0.8), 0 0 10px rgba(212,175,55,0.4)',
               transform: 'translateY(1px)',

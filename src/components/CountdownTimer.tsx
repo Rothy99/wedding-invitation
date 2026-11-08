@@ -73,7 +73,7 @@ export const CountdownTimer: React.FC = () => {
             <span>កាលបរិច្ឆេទនៃថ្ងៃមង្គល</span>
           </div>
 
-          <h3 className="font-moul text-2xl sm:text-3xl text-gold-bright tracking-wide mb-1 leading-relaxed">
+          <h3 className="font-moul text-2xl sm:text-3xl text-gold-bright tracking-normal mb-1 leading-relaxed">
             {weddingData.event.solarDateKhmer}
           </h3>
           <p className="text-xs sm:text-sm text-gold-200/90 font-kantumruy leading-relaxed">

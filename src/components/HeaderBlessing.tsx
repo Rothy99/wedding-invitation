@@ -123,7 +123,7 @@ export const HeaderBlessing: React.FC<HeaderBlessingProps> = ({ isRevealed = tru
             យើងខ្ញុំមានកិត្តិយសដ៏ខ្ពង់ខ្ពស់ សូមគោរពអញ្ជើញ
           </p>
 
-          <p className="font-kantumruy text-base sm:text-lg md:text-xl text-burgundy-900 font-bold leading-relaxed tracking-wide py-0.5">
+          <p className="font-kantumruy text-base sm:text-lg md:text-xl text-burgundy-900 font-bold leading-relaxed tracking-normal py-0.5">
             {guestName ? (
               <span className="text-gold-gradient drop-shadow font-moul text-lg sm:text-xl">
                 {guestName}
@@ -138,7 +138,7 @@ export const HeaderBlessing: React.FC<HeaderBlessingProps> = ({ isRevealed = tru
           </p>
 
           {/* Auspicious Khmer Four Blessings */}
-          <div className="pt-2 text-[11px] sm:text-xs text-gold-700 font-kantumruy font-medium tracking-wide">
+          <div className="pt-2 text-[11px] sm:text-xs text-gold-700 font-kantumruy font-medium tracking-normal">
             ✧ អាយុ វណ្ណៈ សុខៈ ពលៈ កុំបីឃ្លៀងឃ្លាតឡើយ ✧
           </div>
         </div>
@@ -167,7 +167,7 @@ export const HeaderBlessing: React.FC<HeaderBlessingProps> = ({ isRevealed = tru
           className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/95 hover:bg-gold-50/95 active:scale-95 border-2 border-gold-400/60 text-gold-900 text-xs sm:text-sm font-kantumruy font-bold shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer hover:border-gold-500"
           title="ចុចដើម្បីអូសចុះក្រោមដោយរលូន"
         >
-          <span className="tracking-wide">អូសចុះក្រោមដើម្បីទស្សនា</span>
+          <span className="tracking-normal">អូសចុះក្រោមដើម្បីទស្សនា</span>
           <ChevronDown className="w-4 h-4 text-gold-600 animate-bounce group-hover:text-gold-700 flex-shrink-0" />
         </button>
       </div>

@@ -399,7 +399,7 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, isOpen }) 
               style={{ width: isPressed ? '100%' : `${((COUNTDOWN_SECONDS - countdown) / COUNTDOWN_SECONDS) * 100}%` }}
             />
 
-            <span className="relative z-10 tracking-wide drop-shadow font-medium">បើកលិខិតអញ្ជើញ 🎵</span>
+            <span className="relative z-10 tracking-normal drop-shadow font-medium">បើកលិខិតអញ្ជើញ 🎵</span>
             <Heart className="relative z-10 w-4 h-4 fill-white text-white group-hover:scale-125 transition-transform duration-300 flex-shrink-0" />
           </button>
 

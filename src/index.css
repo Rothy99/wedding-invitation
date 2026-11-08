@@ -55,8 +55,19 @@
   }
 
   /* Bold Khmer Headings & Ceremonial Titles: Kh Ang Moul Seda */
-  h1, h2, h3, h4, h5, h6, .font-moul {
-    font-family: 'Kh Ang Moul Seda', 'Kh Ang Moul', 'Moul', 'Khmer OS Muol', cursive, serif;
+  h1, h2, h3, h4, h5, h6, .font-moul, .font-bold-khmer {
+    font-family: 'Kh Ang Moul Seda', 'Kh Ang Moul', 'Moul', 'Khmer OS Muol', cursive, serif !important;
+    letter-spacing: 0 !important;
+  }
+
+  /* Ensure child spans/em inside headings and font-moul inherit Kh Ang Moul Seda */
+  h1 *, h2 *, h3 *, h4 *, h5 *, h6 *, .font-moul * {
+    font-family: inherit !important;
+    letter-spacing: 0 !important;
+  }
+
+  /* Prevent Khmer ligature detachment: zero letter-spacing across all Khmer text */
+  [lang="km"], .font-moul, .font-regular, .font-toathmor, .font-kantumruy, .font-bold-khmer {
     letter-spacing: 0 !important;
   }
 
