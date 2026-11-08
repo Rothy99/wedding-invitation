@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { Heart, Clock, Sparkles } from 'lucide-react';
 import { toKhmerDigits, weddingData } from '../config/weddingConfig';
+import { backgroundConfig } from '../config/backgroundConfig';
 import { firstScreenConfig, getFirstScreenMedia } from '../config/firstScreenConfig';
 import { weddingAudio } from '../utils/audioManager';
 import { KbachPhkaChan, KhmerCardBackground } from './KhmerMotif';
@@ -11,7 +12,10 @@ interface EnvelopeCoverProps {
   isOpen: boolean;
 }
 
-const COUNTDOWN_SECONDS = firstScreenConfig.animation.autoOpenCountdownSeconds || 5;
+const COUNTDOWN_SECONDS = 
+  firstScreenConfig.duration?.countdownSeconds ?? 
+  firstScreenConfig.animation?.autoOpenCountdownSeconds ?? 
+  10;
 
 export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, isOpen }) => {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -25,6 +29,20 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, isOpen }) 
 
   const media = getFirstScreenMedia();
   const { groom, bride } = weddingData.couple;
+
+  // Immediately request video music playback on first screen if configured
+  useEffect(() => {
+    if (firstScreenConfig.audio.playMusic) {
+      weddingAudio.play();
+    }
+  }, []);
+
+  // When background is not video, attach left door video to audioManager
+  useEffect(() => {
+    if (media.type === 'video' && leftVideoRef.current && backgroundConfig.type !== 'video') {
+      weddingAudio.attachVideo(leftVideoRef.current);
+    }
+  }, [media.type]);
 
   // Frame-level synchronization between left and right door videos
   useEffect(() => {
@@ -121,9 +139,11 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, isOpen }) 
     }, 3400);
   };
 
-  // Automatic 5-second countdown to open home invitation with sound
+  // Automatic countdown (configurable 10s) to open home invitation with sound
   useEffect(() => {
     if (isOpen) return;
+
+    if (!firstScreenConfig.duration?.autoOpenEnabled) return;
 
     setCountdown(COUNTDOWN_SECONDS);
 

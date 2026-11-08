@@ -1,5 +1,6 @@
 // Global Wedding Audio Controller for Reliable Autoplay Across Mobile & Desktop
 import { backgroundConfig } from '../config/backgroundConfig';
+import { firstScreenConfig } from '../config/firstScreenConfig';
 
 type AudioSubscriber = (playing: boolean, isBlocked: boolean) => void;
 
@@ -21,9 +22,13 @@ class WeddingAudioManager {
     }
   }
 
-  /** Check if background video is active and should provide audio instead of mp3 */
+  /** Check if video is active and should provide audio instead of mp3 */
   public isVideoAudioMode(): boolean {
-    return backgroundConfig.type === 'video' && backgroundConfig.video.hasAudio;
+    const isBgVideo = backgroundConfig.type === 'video' && backgroundConfig.video.hasAudio;
+    const isFirstScreenVideo = 
+      (firstScreenConfig.type === 'video' && firstScreenConfig.video.hasAudio) ||
+      (firstScreenConfig.type === 'match_background' && isBgVideo);
+    return isBgVideo || isFirstScreenVideo || firstScreenConfig.audio.playMusic;
   }
 
   /** Attach the background video element to synchronize volume and playback states */
@@ -104,12 +109,13 @@ class WeddingAudioManager {
       // If in video audio mode and playback was requested
       if (this.isVideoAudioMode() && this.shouldPlayOnUnlock && this.videoEl) {
         this.videoEl.muted = false;
-        this.videoEl.volume = backgroundConfig.video.volume;
+        this.videoEl.volume = firstScreenConfig.audio.volume ?? backgroundConfig.video.volume ?? 1.0;
         this.videoEl
           .play()
           .then(() => {
             this.isPlaying = true;
             this.isBlocked = false;
+            this.shouldPlayOnUnlock = false;
             this.notify();
           })
           .catch(() => {});
@@ -162,7 +168,7 @@ class WeddingAudioManager {
     if (this.isVideoAudioMode()) {
       if (this.videoEl) {
         this.videoEl.muted = false;
-        this.videoEl.volume = backgroundConfig.video.volume;
+        this.videoEl.volume = firstScreenConfig.audio.volume ?? backgroundConfig.video.volume ?? 1.0;
         return this.videoEl
           .play()
           .then(() => {

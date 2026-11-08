@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { backgroundConfig } from '../config/backgroundConfig';
+import { firstScreenConfig } from '../config/firstScreenConfig';
 import { weddingAudio } from '../utils/audioManager';
 
 interface HomeScreenBackgroundProps {
@@ -9,14 +10,17 @@ interface HomeScreenBackgroundProps {
 export const HomeScreenBackground: React.FC<HomeScreenBackgroundProps> = ({ isEnvelopeOpen }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  // Attach video to audioManager if in video mode
+  // Attach video to audioManager if in video mode and immediately start music if configured
   useEffect(() => {
     if (backgroundConfig.type === 'video' && videoRef.current) {
       weddingAudio.attachVideo(videoRef.current);
+      if (firstScreenConfig.audio.playMusic || backgroundConfig.video.hasAudio) {
+        weddingAudio.play();
+      }
     }
   }, []);
 
-  // When envelope opens and video has audio, unmute and play video sound
+  // When envelope opens and video has audio, ensure video sound is playing
   useEffect(() => {
     if (isEnvelopeOpen && backgroundConfig.type === 'video' && backgroundConfig.video.hasAudio) {
       weddingAudio.play();
