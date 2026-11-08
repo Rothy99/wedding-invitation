@@ -6,13 +6,6 @@ import { Image as ImageIcon, X, ChevronLeft, ChevronRight, ZoomIn, Sparkles } fr
 export const GallerySection: React.FC = () => {
   const { gallery } = weddingData;
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
-  const [activeCategory, setActiveCategory] = useState<'all' | 'angkor' | 'ceremony'>('all');
-
-  const filteredPhotos = gallery.filter((_, idx) => {
-    if (activeCategory === 'angkor') return idx === 0;
-    if (activeCategory === 'ceremony') return idx > 0;
-    return true;
-  });
 
   const openLightbox = (index: number) => {
     setSelectedPhotoIndex(index);
@@ -82,48 +75,13 @@ export const GallerySection: React.FC = () => {
           <KhmerDivider className="my-4" />
         </div>
 
-        {/* Filter Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-6 relative z-10">
-          <button
-            onClick={() => setActiveCategory('all')}
-            className={`px-4 py-1.5 rounded-full text-xs font-kantumruy font-semibold transition-all cursor-pointer ${
-              activeCategory === 'all'
-                ? 'bg-burgundy-900 text-gold-200 border border-gold-400 shadow-sm'
-                : 'bg-cream-50 text-stone-600 border border-gold-200 hover:bg-gold-50'
-            }`}
-          >
-            ✨ រូបភាពទាំងអស់ ({gallery.length})
-          </button>
-          <button
-            onClick={() => setActiveCategory('angkor')}
-            className={`px-4 py-1.5 rounded-full text-xs font-kantumruy font-semibold transition-all cursor-pointer ${
-              activeCategory === 'angkor'
-                ? 'bg-burgundy-900 text-gold-200 border border-gold-400 shadow-sm'
-                : 'bg-cream-50 text-stone-600 border border-gold-200 hover:bg-gold-50'
-            }`}
-          >
-            📸 រូបថត Pre-Wedding
-          </button>
-          <button
-            onClick={() => setActiveCategory('ceremony')}
-            className={`px-4 py-1.5 rounded-full text-xs font-kantumruy font-semibold transition-all cursor-pointer ${
-              activeCategory === 'ceremony'
-                ? 'bg-burgundy-900 text-gold-200 border border-gold-400 shadow-sm'
-                : 'bg-cream-50 text-stone-600 border border-gold-200 hover:bg-gold-50'
-            }`}
-          >
-            💖 អនុស្សាវរីយ៍ផ្អែមល្ហែម
-          </button>
-        </div>
-
         {/* Photos Grid */}
         <div className="relative z-10 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-          {filteredPhotos.map((photo, index) => {
-            const originalIndex = gallery.indexOf(photo);
+          {gallery.map((photo, index) => {
             return (
               <div
                 key={index}
-                onClick={() => openLightbox(originalIndex)}
+                onClick={() => openLightbox(index)}
                 className="group relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-gold-400/50 shadow-md cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-stone-900"
               >
                 <img
@@ -134,7 +92,7 @@ export const GallerySection: React.FC = () => {
                 />
 
                 {/* Subtle Angkor Wat Badge on 1st Photo */}
-                {originalIndex === 0 && (
+                {index === 0 && (
                   <div className="absolute top-2.5 left-2.5 z-20 px-2 py-0.5 rounded-full bg-burgundy-950/95 border border-gold-400/60 text-gold-300 text-[10px] font-kantumruy flex items-center gap-1 shadow-md">
                     <Sparkles className="w-2.5 h-2.5 text-gold-400" />
                     <span>Angkor Wat</span>

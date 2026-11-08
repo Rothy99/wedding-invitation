@@ -17,6 +17,7 @@ import { ScrollReveal } from './components/ScrollReveal';
 import { CycleSparkleOverlay } from './components/CycleSparkleOverlay';
 import { HomeScreenBackground } from './components/HomeScreenBackground';
 import { weddingAudio } from './utils/audioManager';
+import { weddingData } from './config/weddingConfig';
 import { ChevronUp } from 'lucide-react';
 
 export const App: React.FC = () => {
@@ -158,10 +159,15 @@ export const App: React.FC = () => {
         {/* Continuous Khmer Kbach Ribbon */}
         <KbachVineRibbon className="my-2" />
 
-        {/* RSVP Attendance Confirmation */}
-        <ScrollReveal direction="up" delay={60}>
-          <RsvpSection />
-        </ScrollReveal>
+        {/* RSVP Attendance Confirmation (Hidden when showRsvp is false) */}
+        {weddingData.features?.showRsvp && (
+          <>
+            <ScrollReveal direction="up" delay={60}>
+              <RsvpSection />
+            </ScrollReveal>
+            <KbachVineRibbon className="my-2" />
+          </>
+        )}
 
         {/* KHQR Gift / Banking Token */}
         <ScrollReveal direction="up" delay={60}>

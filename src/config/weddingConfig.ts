@@ -73,10 +73,20 @@ export interface WeddingConfig {
     url: string;
   };
   background: BackgroundConfig;
+  features?: {
+    showRsvp?: boolean;
+    showKhqr?: boolean;
+    showWishes?: boolean;
+  };
 }
 
 export const weddingData: WeddingConfig = {
   background: backgroundConfig,
+  features: {
+    showRsvp: false, // Set to false to hide ការឆ្លើយតបវត្តមាន section per user request
+    showKhqr: true,
+    showWishes: true,
+  },
   couple: {
     groom: {
       nameKhmer: "សុទ្ធា",
