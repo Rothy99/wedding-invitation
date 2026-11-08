@@ -60,28 +60,28 @@ export const ScheduleSection: React.FC = () => {
         </div>
 
         {/* Tab Switcher: Morning vs Evening (Luxury Royal Pill Dock matching screenshot) */}
-        <div className="p-1 sm:p-1.5 rounded-full bg-stone-900/10 backdrop-blur-md border border-gold-400/40 shadow-inner flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 mb-8 relative z-10 w-full max-w-lg mx-auto">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 mb-8 relative z-10 w-full max-w-lg mx-auto">
           <button
             onClick={() => setActiveTab('morning')}
-            className={`w-full sm:w-auto flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-full font-kantumruy text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
+            className={`w-full sm:w-auto flex-1 flex items-center justify-center gap-2 px-5 py-2.5 rounded-full font-kantumruy text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
               activeTab === 'morning'
-                ? 'bg-gradient-to-r from-burgundy-950 via-burgundy-900 to-burgundy-950 text-gold-200 shadow-[0_4px_14px_rgba(92,18,33,0.45),inset_0_1px_1px_rgba(255,255,255,0.25)] border border-gold-400/80'
-                : 'bg-white/85 text-stone-700 hover:bg-white hover:text-burgundy-900 border border-stone-200/80 hover:border-gold-300/80 shadow-sm'
+                ? 'bg-[#3B0712] text-[#FFF7E8] shadow-[0_4px_16px_rgba(59,7,18,0.55),inset_0_1px_1px_rgba(255,255,255,0.25)] border border-amber-400/90 scale-[1.02]'
+                : 'bg-white text-stone-800 hover:text-burgundy-950 border border-stone-200/90 hover:border-gold-300 shadow-sm'
             }`}
           >
-            <Sun className={`w-4 h-4 ${activeTab === 'morning' ? 'text-gold-400' : 'text-amber-500'}`} />
+            <Sun className={`w-4 h-4 flex-shrink-0 ${activeTab === 'morning' ? 'text-amber-400' : 'text-amber-500'}`} />
             <span>កម្មវិធីពេលព្រឹក (ពិធីប្រពៃណី)</span>
           </button>
 
           <button
             onClick={() => setActiveTab('evening')}
-            className={`w-full sm:w-auto flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-full font-kantumruy text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
+            className={`w-full sm:w-auto flex-1 flex items-center justify-center gap-2 px-5 py-2.5 rounded-full font-kantumruy text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
               activeTab === 'evening'
-                ? 'bg-gradient-to-r from-burgundy-950 via-burgundy-900 to-burgundy-950 text-gold-200 shadow-[0_4px_14px_rgba(92,18,33,0.45),inset_0_1px_1px_rgba(255,255,255,0.25)] border border-gold-400/80'
-                : 'bg-white/85 text-stone-700 hover:bg-white hover:text-burgundy-900 border border-stone-200/80 hover:border-gold-300/80 shadow-sm'
+                ? 'bg-[#3B0712] text-[#FFF7E8] shadow-[0_4px_16px_rgba(59,7,18,0.55),inset_0_1px_1px_rgba(255,255,255,0.25)] border border-amber-400/90 scale-[1.02]'
+                : 'bg-white text-stone-800 hover:text-burgundy-950 border border-stone-200/90 hover:border-gold-300 shadow-sm'
             }`}
           >
-            <Moon className={`w-4 h-4 ${activeTab === 'evening' ? 'text-gold-400' : 'text-indigo-500'}`} />
+            <Moon className={`w-4 h-4 flex-shrink-0 ${activeTab === 'evening' ? 'text-amber-400' : 'text-[#5D5FEF]'}`} />
             <span>កម្មវិធីពេលល្ងាច (ពិសាភោជនាហារ)</span>
           </button>
         </div>

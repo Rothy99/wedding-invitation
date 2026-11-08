@@ -72,7 +72,7 @@ export const CoupleSection: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-white/12 via-white/[0.02] to-transparent pointer-events-none rounded-2xl" />
 
               <div className="relative z-10 flex flex-col items-center w-full">
-                <span className="px-4 py-1.5 rounded-full bg-gradient-to-r from-burgundy-950 via-burgundy-900 to-burgundy-950 border border-gold-400/60 border-t-white/30 text-gold-200 text-xs sm:text-sm font-bold mb-3 shadow-[0_4px_12px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.3)]">
+                <span className="px-5 py-1.5 rounded-full bg-[#3B0712] border border-amber-400/90 text-[#FFF7E8] text-xs sm:text-sm font-bold mb-3 shadow-[0_4px_14px_rgba(59,7,18,0.5),inset_0_1px_1px_rgba(255,255,255,0.25)] tracking-wide">
                   មាតាបិតាខាងកូនប្រុស
                 </span>
                 <div className="space-y-1 text-white font-kantumruy font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
@@ -98,7 +98,7 @@ export const CoupleSection: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-white/12 via-white/[0.02] to-transparent pointer-events-none rounded-2xl" />
 
               <div className="relative z-10 flex flex-col items-center w-full">
-                <span className="px-4 py-1.5 rounded-full bg-gradient-to-r from-burgundy-950 via-burgundy-900 to-burgundy-950 border border-gold-400/60 border-t-white/30 text-gold-200 text-xs sm:text-sm font-bold mb-3 shadow-[0_4px_12px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.3)]">
+                <span className="px-5 py-1.5 rounded-full bg-[#3B0712] border border-amber-400/90 text-[#FFF7E8] text-xs sm:text-sm font-bold mb-3 shadow-[0_4px_14px_rgba(59,7,18,0.5),inset_0_1px_1px_rgba(255,255,255,0.25)] tracking-wide">
                   មាតាបិតាខាងកូនស្រី
                 </span>
                 <div className="space-y-1 text-white font-kantumruy font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">

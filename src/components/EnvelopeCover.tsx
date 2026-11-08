@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { Heart, Clock, Sparkles } from 'lucide-react';
 import { toKhmerDigits, weddingData } from '../config/weddingConfig';
+import { firstScreenConfig, getFirstScreenMedia } from '../config/firstScreenConfig';
 import { weddingAudio } from '../utils/audioManager';
 import { KbachPhkaChan, KhmerCardBackground } from './KhmerMotif';
 
@@ -10,7 +11,7 @@ interface EnvelopeCoverProps {
   isOpen: boolean;
 }
 
-const COUNTDOWN_SECONDS = 5;
+const COUNTDOWN_SECONDS = firstScreenConfig.animation.autoOpenCountdownSeconds || 5;
 
 export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, isOpen }) => {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -19,8 +20,29 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, isOpen }) 
   const [guestName, setGuestName] = useState<string>('');
   const [countdown, setCountdown] = useState<number>(COUNTDOWN_SECONDS);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const leftVideoRef = useRef<HTMLVideoElement>(null);
+  const rightVideoRef = useRef<HTMLVideoElement>(null);
 
+  const media = getFirstScreenMedia();
   const { groom, bride } = weddingData.couple;
+
+  // Frame-level synchronization between left and right door videos
+  useEffect(() => {
+    if (media.type !== 'video') return;
+    const v1 = leftVideoRef.current;
+    const v2 = rightVideoRef.current;
+    if (!v1 || !v2) return;
+
+    const sync = () => {
+      if (Math.abs(v1.currentTime - v2.currentTime) > 0.08) {
+        v2.currentTime = v1.currentTime;
+      }
+    };
+    v1.addEventListener('timeupdate', sync);
+    return () => {
+      v1.removeEventListener('timeupdate', sync);
+    };
+  }, [media.type]);
 
   // Extract guest name from URL parameters (?to=..., ?guest=..., ?name=...)
   useEffect(() => {
@@ -157,23 +179,40 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, isOpen }) 
         title="ចុចទីណាលើអេក្រង់ក៏បាន ដើម្បីបើក & ស្តាប់បទភ្លេង"
       >
         {/* ========================================================= */}
-        {/* LEFT ROYAL DOOR WING (Glides left in 3.4s cinematic slow motion) */}
+        {/* LEFT ROYAL DOOR WING (Glides left in cinematic slow motion) */}
         {/* ========================================================= */}
         <div 
-          className={`absolute inset-y-0 left-0 w-[50.2%] overflow-hidden z-20 pointer-events-none transition-transform duration-[3400ms] ${
+          className={`absolute inset-y-0 left-0 w-[50.2%] overflow-hidden z-20 pointer-events-none transition-transform ${
             isOpen ? '-translate-x-[102%]' : 'translate-x-0'
           }`}
           style={{
+            transitionDuration: `${firstScreenConfig.animation.doorOpenDurationMs}ms`,
             transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.35, 1)',
             willChange: 'transform',
           }}
         >
           <div className="absolute top-0 left-0 w-[200%] h-full">
-            <img
-              src="/couple_angkor.jpg"
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover object-[center_25%] pointer-events-none"
-            />
+            {media.type === 'video' ? (
+              <video
+                ref={leftVideoRef}
+                src={media.url}
+                poster={media.poster}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                style={{ objectPosition: media.objectPosition || 'center 25%' }}
+              />
+            ) : (
+              <img
+                src={media.url}
+                alt={media.alt || ''}
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                style={{ objectPosition: media.objectPosition || 'center 25%' }}
+              />
+            )}
             {/* Ambient Top & Bottom Vignettes */}
             <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-black/80 via-black/45 to-transparent pointer-events-none" />
             <div className="absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-black/85 via-black/50 to-transparent pointer-events-none" />
@@ -184,23 +223,40 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, isOpen }) 
         </div>
 
         {/* ========================================================= */}
-        {/* RIGHT ROYAL DOOR WING (Glides right in 3.4s cinematic slow motion) */}
+        {/* RIGHT ROYAL DOOR WING (Glides right in cinematic slow motion) */}
         {/* ========================================================= */}
         <div 
-          className={`absolute inset-y-0 right-0 w-[50.2%] overflow-hidden z-20 pointer-events-none transition-transform duration-[3400ms] ${
+          className={`absolute inset-y-0 right-0 w-[50.2%] overflow-hidden z-20 pointer-events-none transition-transform ${
             isOpen ? 'translate-x-[102%]' : 'translate-x-0'
           }`}
           style={{
+            transitionDuration: `${firstScreenConfig.animation.doorOpenDurationMs}ms`,
             transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.35, 1)',
             willChange: 'transform',
           }}
         >
           <div className="absolute top-0 right-0 w-[200%] h-full">
-            <img
-              src="/couple_angkor.jpg"
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover object-[center_25%] pointer-events-none"
-            />
+            {media.type === 'video' ? (
+              <video
+                ref={rightVideoRef}
+                src={media.url}
+                poster={media.poster}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                style={{ objectPosition: media.objectPosition || 'center 25%' }}
+              />
+            ) : (
+              <img
+                src={media.url}
+                alt={media.alt || ''}
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                style={{ objectPosition: media.objectPosition || 'center 25%' }}
+              />
+            )}
             {/* Ambient Top & Bottom Vignettes */}
             <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-black/80 via-black/45 to-transparent pointer-events-none" />
             <div className="absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-black/85 via-black/50 to-transparent pointer-events-none" />
@@ -213,24 +269,29 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, isOpen }) 
         {/* ========================================================= */}
         {/* RADIANT GOLDEN LIGHT BEAM (Bursts through center seam upon opening) */}
         {/* ========================================================= */}
-        <div 
-          className={`absolute inset-y-0 left-1/2 -translate-x-1/2 w-8 sm:w-16 bg-gradient-to-r from-transparent via-gold-200/50 via-white/80 to-transparent pointer-events-none z-25 transition-all duration-[3400ms] ${
-            isOpen ? 'opacity-0 scale-x-[6]' : 'opacity-80 scale-x-100'
-          }`}
-          style={{
-            transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.35, 1)',
-          }}
-        />
+        {firstScreenConfig.animation.showLightBeam && (
+          <div 
+            className={`absolute inset-y-0 left-1/2 -translate-x-1/2 w-8 sm:w-16 bg-gradient-to-r from-transparent via-gold-200/50 via-white/80 to-transparent pointer-events-none z-25 transition-all ${
+              isOpen ? 'opacity-0 scale-x-[6]' : 'opacity-80 scale-x-100'
+            }`}
+            style={{
+              transitionDuration: `${firstScreenConfig.animation.doorOpenDurationMs}ms`,
+              transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.35, 1)',
+            }}
+          />
+        )}
 
         {/* Central Royal Monogram Wax Seal Medal on Door Seam */}
-        <div 
-          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none w-12 h-12 rounded-full bg-gradient-to-br from-[#8E1B32] via-[#5C1221] to-[#3D0914] text-gold-300 border-2 border-gold-400 shadow-[0_4px_20px_rgba(0,0,0,0.6),0_0_15px_rgba(212,175,55,0.6)] flex items-center justify-center transition-all duration-900 ${
-            isOpen ? 'scale-125 opacity-0' : 'scale-100 opacity-100'
-          }`}
-        >
-          <span className="font-moul text-xs text-gold-200 tracking-wider">ស • វ</span>
-          <div className="absolute inset-0 rounded-full border border-gold-400/40 animate-pulse pointer-events-none" />
-        </div>
+        {firstScreenConfig.animation.showMonogramSeal && (
+          <div 
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none w-12 h-12 rounded-full bg-gradient-to-br from-[#8E1B32] via-[#5C1221] to-[#3D0914] text-gold-300 border-2 border-gold-400 shadow-[0_4px_20px_rgba(0,0,0,0.6),0_0_15px_rgba(212,175,55,0.6)] flex items-center justify-center transition-all duration-900 ${
+              isOpen ? 'scale-125 opacity-0' : 'scale-100 opacity-100'
+            }`}
+          >
+            <span className="font-moul text-xs text-gold-200 tracking-wider">{firstScreenConfig.branding.sealMonogram}</span>
+            <div className="absolute inset-0 rounded-full border border-gold-400/40 animate-pulse pointer-events-none" />
+          </div>
+        )}
 
         {/* ========================================================= */}
         {/* TOP HEADER BRANDING (Floats upward smoothly upon opening) */}
@@ -245,7 +306,7 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, isOpen }) 
           </div>
 
           <span className="text-[10px] sm:text-xs font-kantumruy font-medium tracking-[0.22em] text-gold-300 uppercase drop-shadow">
-            SAVE THE DATE
+            {firstScreenConfig.branding.badgeText}
           </span>
 
           <h1 
@@ -260,9 +321,9 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, isOpen }) 
 
           {/* Date Tag */}
           <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-black/45 border border-gold-400/40 text-gold-200 text-[10px] sm:text-[11px] font-kantumruy backdrop-blur-sm mt-2 shadow-md">
-            <span>១៨ · ធ្នូ · ២០២៦</span>
+            <span>{firstScreenConfig.branding.dateTextKhmer}</span>
             <span className="text-gold-400/60">•</span>
-            <span>សាលចំការដូង</span>
+            <span>{firstScreenConfig.branding.locationTextKhmer}</span>
           </div>
         </div>
 

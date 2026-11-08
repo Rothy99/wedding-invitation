@@ -1,6 +1,7 @@
 import { backgroundConfig, type BackgroundConfig } from './backgroundConfig';
-export { backgroundConfig };
-export type { BackgroundConfig };
+import { firstScreenConfig, type FirstScreenConfig } from './firstScreenConfig';
+export { backgroundConfig, firstScreenConfig };
+export type { BackgroundConfig, FirstScreenConfig };
 
 export interface ScheduleItem {
   time: string;
