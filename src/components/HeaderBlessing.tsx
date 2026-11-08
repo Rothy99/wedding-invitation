@@ -54,14 +54,18 @@ export const HeaderBlessing: React.FC<HeaderBlessingProps> = ({ isRevealed = tru
         }`}
       >
         <h1 
-          className="font-moul text-3xl sm:text-4xl md:text-5xl text-burgundy-900 tracking-wide leading-[1.6] sm:leading-[1.7]"
+          className="font-moul text-3xl sm:text-4xl md:text-5xl text-burgundy-900 tracking-normal leading-[1.7] sm:leading-[1.8]"
           style={{
             textShadow: '0 2px 4px rgba(255, 255, 255, 0.9), 0 4px 14px rgba(92, 18, 33, 0.28)',
+            letterSpacing: '0',
           }}
         >
           {event.titleKhmer}
         </h1>
-        <p className="font-moul text-lg sm:text-2xl text-gold-600 mt-1 tracking-wider drop-shadow-sm">
+        <p 
+          className="font-moul text-lg sm:text-2xl text-gold-600 mt-1 tracking-normal drop-shadow-sm leading-relaxed"
+          style={{ letterSpacing: '0' }}
+        >
           លិខិតគោរពអញ្ជើញ
         </p>
 

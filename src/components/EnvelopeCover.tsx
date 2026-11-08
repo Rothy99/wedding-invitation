@@ -330,12 +330,16 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, isOpen }) 
           </span>
 
           <h1 
-            className="font-moul text-xl sm:text-2xl text-white mt-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] tracking-wide leading-relaxed"
+            className="font-moul text-xl sm:text-2xl text-white mt-1.5 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95),0_0_20px_rgba(212,175,55,0.4)] tracking-normal leading-[1.7]"
+            style={{ letterSpacing: '0' }}
           >
             {weddingData.event.titleKhmer}
           </h1>
 
-          <p className="font-moul text-sm sm:text-base text-gold-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] tracking-wider mt-0.5">
+          <p 
+            className="font-moul text-sm sm:text-base text-gold-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] tracking-normal mt-0.5 leading-relaxed"
+            style={{ letterSpacing: '0' }}
+          >
             {groom.nameKhmer} 🤍 {bride.nameKhmer}
           </p>
 

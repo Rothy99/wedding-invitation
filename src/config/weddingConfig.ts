@@ -100,7 +100,7 @@ export const weddingData: WeddingConfig = {
     },
   },
   event: {
-    titleKhmer: "សិរីសួស្តី អាពាហ៍ពិពាហ៍",
+    titleKhmer: "សិរីសួស្តីអាពាហ៍ពិពាហ៍",
     blessingQuoteKhmer: "ស្នេហានិរន្តរ៍ ចំណងនិស្ស័យ",
     solarDateKhmer: "ថ្ងៃសុក្រ ទី១៨ ខែធ្នូ ឆ្នាំ២០២៦",
     lunarDateKhmer: "ត្រូវនឹងថ្ងៃ ១០ កើត ខែមិគសិរ ឆ្នាំរោង ឆស័ក ព.ស. ២៥៧០",

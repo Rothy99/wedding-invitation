@@ -142,7 +142,7 @@ export const firstScreenConfig: FirstScreenConfig = {
 
   image: {
     url: '/couple_angkor.jpg',
-    alt: 'សិរីសួស្តី អាពាហ៍ពិពាហ៍ សុទ្ធា & សុខវត្ដី',
+    alt: 'សិរីសួស្តីអាពាហ៍ពិពាហ៍ សុទ្ធា & សុខវត្ដី',
     objectPosition: 'center 25%',
   },
 

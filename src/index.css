@@ -54,9 +54,10 @@
     font-family: 'Kh Ang ToaThmor 3', 'Kh Ang ToaThmor', 'Kdam Thmor Pro', 'Kantumruy Pro', sans-serif;
   }
 
-  /* Bold Khmer Text & Headings: Kh Ang Moul Seda */
-  h1, h2, h3, h4, h5, h6, .font-moul, .font-bold {
+  /* Bold Khmer Headings & Ceremonial Titles: Kh Ang Moul Seda */
+  h1, h2, h3, h4, h5, h6, .font-moul {
     font-family: 'Kh Ang Moul Seda', 'Kh Ang Moul', 'Moul', 'Khmer OS Muol', cursive, serif;
+    letter-spacing: 0 !important;
   }
 
   /* Prevent automatic iOS zoom on mobile form focus (iPhone zoom bug fix) */
