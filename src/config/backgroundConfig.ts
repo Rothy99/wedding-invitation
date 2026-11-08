@@ -79,7 +79,7 @@ export const backgroundConfig: BackgroundConfig = {
   // 1. CHOOSE BACKGROUND TYPE (ជ្រើសរើសប្រភេទ Background)
   // Options: 'image' | 'video'
   // ===================================================================
-  type: 'image',
+  type: 'video',
 
   // ===================================================================
   // 2. IMAGE CONFIGURATION (បើជ្រើសរើស Image)
@@ -93,11 +93,10 @@ export const backgroundConfig: BackgroundConfig = {
   // 3. VIDEO CONFIGURATION (បើជ្រើសរើស Video)
   // ===================================================================
   video: {
-    // Put your video in the 'public' folder and put the filename here (e.g. '/wedding_video.mp4')
-    // ឬដាក់ Link វីដេអូផ្ទាល់
+    // Web-optimized MP4 wedding video with built-in music
     url: '/wedding_video.mp4',
-    poster: '/couple_angkor.jpg',
-    // Video has music? Set to true! (ភ្លេង MP3 នឹងបិទមិនឱ្យចាក់ជាន់គ្នា)
+    poster: '/wedding_video_poster.jpg',
+    // Video has its own music/audio -> MP3 music is automatically disabled!
     hasAudio: true,
     loop: true,
     volume: 0.9,
@@ -108,10 +107,10 @@ export const backgroundConfig: BackgroundConfig = {
   // 4. OVERLAY STYLING (កម្រិតពន្លឺ និងក្បាច់)
   // ===================================================================
   overlay: {
-    tintOpacity: 0.72,
-    blurPx: 1,
-    showSilkPattern: true,
-    showVignette: true,
+    tintOpacity: 0.60, // Elegant translucent tint allowing video to play gorgeously
+    blurPx: 0, // Crisp cinematic video view
+    showSilkPattern: true, // Authentic Khmer silk watermark
+    showVignette: true, // Smooth top & bottom vignette
   },
 };
 

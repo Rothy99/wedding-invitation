@@ -34,14 +34,20 @@ export const HomeScreenBackground: React.FC<HomeScreenBackgroundProps> = ({ isEn
       {/* 1. MEDIA LAYER (Image or Video) */}
       {backgroundConfig.type === 'video' ? (
         <video
-          ref={videoRef}
+          ref={(el) => {
+            videoRef.current = el;
+            if (el && backgroundConfig.type === 'video') {
+              weddingAudio.attachVideo(el);
+            }
+          }}
           src={backgroundConfig.video.url}
           poster={backgroundConfig.video.poster || backgroundConfig.image.url}
           autoPlay
           playsInline
           loop={backgroundConfig.video.loop}
           muted={true} // Starts muted for reliable browser autoplay before user interaction
-          className="w-full h-full object-cover object-[center_top]"
+          preload="auto"
+          className="w-full h-full object-cover object-center"
         />
       ) : (
         <img
