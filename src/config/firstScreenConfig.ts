@@ -108,6 +108,7 @@ export interface FirstScreenConfig {
     badgeText: string;
     sealMonogram: string;
     dateTextKhmer: string;
+    lunarDateTextKhmer?: string;
     locationTextKhmer: string;
     openButtonTextKhmer: string;
     openButtonSubtextKhmer: string;
@@ -157,6 +158,7 @@ export const firstScreenConfig: FirstScreenConfig = {
     badgeText: 'SAVE THE DATE',
     sealMonogram: 'ស • វ',
     dateTextKhmer: '១៨ · ធ្នូ · ២០២៦',
+    lunarDateTextKhmer: 'ត្រូវនឹងថ្ងៃ ៩ កើត ខែមិគសិរ ឆ្នាំមមី អដ្ឋស័ក ព.ស. ២៥៧០',
     locationTextKhmer: 'សាលចំការដូង',
     openButtonTextKhmer: 'បើកសំបុត្រអាពាហ៍ពិពាហ៍',
     openButtonSubtextKhmer: 'ចុចដើម្បីបើក & ស្តាប់ភ្លេងពិរោះៗ',

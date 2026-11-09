@@ -343,11 +343,18 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, isOpen }) 
             {groom.nameKhmer} 🤍 {bride.nameKhmer}
           </p>
 
-          {/* Date Tag */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-black/45 border border-gold-400/40 text-gold-200 text-[10px] sm:text-[11px] font-kantumruy backdrop-blur-sm mt-2 shadow-md">
-            <span>{firstScreenConfig.branding.dateTextKhmer}</span>
-            <span className="text-gold-400/60">•</span>
-            <span>{firstScreenConfig.branding.locationTextKhmer}</span>
+          {/* Date Tag (Solar & Khmer Lunar Format) */}
+          <div className="flex flex-col items-center gap-1 mt-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-black/45 border border-gold-400/40 text-gold-200 text-[10px] sm:text-[11px] font-kantumruy backdrop-blur-sm shadow-md">
+              <span>{firstScreenConfig.branding.dateTextKhmer}</span>
+              <span className="text-gold-400/60">•</span>
+              <span>{firstScreenConfig.branding.locationTextKhmer}</span>
+            </div>
+            {firstScreenConfig.branding.lunarDateTextKhmer && (
+              <span className="text-[10px] sm:text-[11px] text-gold-200/95 font-kantumruy drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                {firstScreenConfig.branding.lunarDateTextKhmer}
+              </span>
+            )}
           </div>
         </div>
 

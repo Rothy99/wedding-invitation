@@ -113,7 +113,7 @@ export const weddingData: WeddingConfig = {
     titleKhmer: "សិរីសួស្តីអាពាហ៍ពិពាហ៍",
     blessingQuoteKhmer: "ស្នេហានិរន្តរ៍ ចំណងនិស្ស័យ",
     solarDateKhmer: "ថ្ងៃសុក្រ ទី១៨ ខែធ្នូ ឆ្នាំ២០២៦",
-    lunarDateKhmer: "ត្រូវនឹងថ្ងៃ ១០ កើត ខែមិគសិរ ឆ្នាំរោង ឆស័ក ព.ស. ២៥៧០",
+    lunarDateKhmer: "ត្រូវនឹងថ្ងៃ ៩ កើត ខែមិគសិរ ឆ្នាំមមី អដ្ឋស័ក ព.ស. ២៥៧០",
     dateEn: "Friday, December 18, 2026",
     targetIsoDate: "2026-12-18T07:00:00+07:00",
     venueNameKhmer: "សាលចំការដូង",

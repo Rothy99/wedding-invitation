@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { KhmerDivider, KhmerCorner, KbachPhkaChan, KhmerCardBackground } from './KhmerMotif';
 import { RoyalMonogramSeal } from './RoyalMonogramSeal';
 import { weddingData } from '../config/weddingConfig';
-import { UserCheck, ChevronDown, Calendar, MapPin } from 'lucide-react';
+import { UserCheck, ChevronDown, Calendar, MapPin, Moon } from 'lucide-react';
 
 interface HeaderBlessingProps {
   isRevealed?: boolean;
@@ -69,15 +69,23 @@ export const HeaderBlessing: React.FC<HeaderBlessingProps> = ({ isRevealed = tru
           លិខិតគោរពអញ្ជើញ
         </p>
 
-        {/* Auspicious Date & Venue Quick Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mt-3.5 text-xs font-kantumruy">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 border border-gold-400/50 text-stone-800 shadow-sm">
-            <Calendar className="w-3.5 h-3.5 text-burgundy-800" />
-            <span className="font-medium">{event.solarDateKhmer}</span>
+        {/* Auspicious Solar Date, Khmer Lunar Date & Venue Quick Badges */}
+        <div className="flex flex-col items-center justify-center gap-2 mt-3.5 text-xs font-kantumruy px-2">
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 border border-gold-400/50 text-stone-800 shadow-sm">
+              <Calendar className="w-3.5 h-3.5 text-burgundy-800 flex-shrink-0" />
+              <span className="font-medium">{event.solarDateKhmer}</span>
+            </div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 border border-gold-400/50 text-stone-800 shadow-sm">
+              <MapPin className="w-3.5 h-3.5 text-burgundy-800 flex-shrink-0" />
+              <span className="font-medium">{event.venueNameKhmer}</span>
+            </div>
           </div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 border border-gold-400/50 text-stone-800 shadow-sm">
-            <MapPin className="w-3.5 h-3.5 text-burgundy-800" />
-            <span className="font-medium">{event.venueNameKhmer}</span>
+
+          {/* Traditional Khmer Lunar Date Badge (ចន្ទគតិ) */}
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/95 border border-gold-400/50 text-burgundy-900 shadow-sm text-[11px] sm:text-xs">
+            <Moon className="w-3.5 h-3.5 text-gold-600 flex-shrink-0" />
+            <span className="font-medium text-center">{event.lunarDateKhmer}</span>
           </div>
         </div>
       </div>
